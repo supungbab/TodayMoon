@@ -376,6 +376,7 @@ window.onload=function(){
     var date=document.getElementById("date");
     var day=dayCalcDisplay(gYear,gMonth,gDay);
     if(day.length==1) day="0"+day;
+    console.log(day);
     moon.innerHTML="<img src=https://d5.co.kr/img/luna/2/s/"+day+".png />";
     date.innerHTML="<span>"+gYear+"년 "+gMonth+"월 "+gDay+"일"+"</span>"
 }
