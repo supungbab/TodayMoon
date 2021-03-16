@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 .nanumgothic * {
  font-family: 'Nanum Gothic', sans-serif;
