@@ -1,131 +1,417 @@
-@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
-
-.nanumgothic * {
- font-family: 'Nanum Gothic', sans-serif;
+var lunarMonthTable = [
+    [2, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2],
+    [1, 2, 1, 1, 2, 1, 2, 5, 2, 2, 1, 2],
+    [1, 2, 1, 1, 2, 1, 2, 1, 2, 2, 2, 1],   /* 1901 */
+    [2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 2, 2],
+    [1, 2, 1, 2, 3, 2, 1, 1, 2, 2, 1, 2],
+    [2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 2, 1],
+    [2, 2, 1, 2, 2, 1, 1, 2, 1, 2, 1, 2],
+    [1, 2, 2, 4, 1, 2, 1, 2, 1, 2, 1, 2],
+    [1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1],
+    [2, 1, 1, 2, 2, 1, 2, 1, 2, 2, 1, 2],
+    [1, 5, 1, 2, 1, 2, 1, 2, 2, 2, 1, 2],
+    [1, 2, 1, 1, 2, 1, 2, 1, 2, 2, 2, 1],
+    [2, 1, 2, 1, 1, 5, 1, 2, 2, 1, 2, 2],   /* 1911 */
+    [2, 1, 2, 1, 1, 2, 1, 1, 2, 2, 1, 2],
+    [2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 2],
+    [2, 2, 1, 2, 5, 1, 2, 1, 2, 1, 1, 2],
+    [2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2],
+    [1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1],
+    [2, 3, 2, 1, 2, 2, 1, 2, 2, 1, 2, 1],
+    [2, 1, 1, 2, 1, 2, 1, 2, 2, 2, 1, 2],
+    [1, 2, 1, 1, 2, 1, 5, 2, 2, 1, 2, 2],
+    [1, 2, 1, 1, 2, 1, 1, 2, 2, 1, 2, 2],
+    [2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 2, 2],   /* 1921 */
+    [2, 1, 2, 2, 3, 2, 1, 1, 2, 1, 2, 2],
+    [1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2],
+    [2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 1],
+    [2, 1, 2, 5, 2, 1, 2, 2, 1, 2, 1, 2],
+    [1, 1, 2, 1, 2, 1, 2, 2, 1, 2, 2, 1],
+    [2, 1, 1, 2, 1, 2, 1, 2, 2, 1, 2, 2],
+    [1, 5, 1, 2, 1, 1, 2, 2, 1, 2, 2, 2],
+    [1, 2, 1, 1, 2, 1, 1, 2, 1, 2, 2, 2],
+    [1, 2, 2, 1, 1, 5, 1, 2, 1, 2, 2, 1],
+    [2, 2, 2, 1, 1, 2, 1, 1, 2, 1, 2, 1],   /* 1931 */
+    [2, 2, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2],
+    [1, 2, 2, 1, 6, 1, 2, 1, 2, 1, 1, 2],
+    [1, 2, 1, 2, 2, 1, 2, 2, 1, 2, 1, 2],
+    [1, 1, 2, 1, 2, 1, 2, 2, 1, 2, 2, 1],
+    [2, 1, 4, 1, 2, 1, 2, 1, 2, 2, 2, 1],
+    [2, 1, 1, 2, 1, 1, 2, 1, 2, 2, 2, 1],
+    [2, 2, 1, 1, 2, 1, 4, 1, 2, 2, 1, 2],
+    [2, 2, 1, 1, 2, 1, 1, 2, 1, 2, 1, 2],
+    [2, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1],
+    [2, 2, 1, 2, 2, 4, 1, 1, 2, 1, 2, 1],   /* 1941 */
+    [2, 1, 2, 2, 1, 2, 2, 1, 2, 1, 1, 2],
+    [1, 2, 1, 2, 1, 2, 2, 1, 2, 2, 1, 2],
+    [1, 1, 2, 4, 1, 2, 1, 2, 2, 1, 2, 2],
+    [1, 1, 2, 1, 1, 2, 1, 2, 2, 2, 1, 2],
+    [2, 1, 1, 2, 1, 1, 2, 1, 2, 2, 1, 2],
+    [2, 5, 1, 2, 1, 1, 2, 1, 2, 1, 2, 2],
+    [2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2],
+    [2, 2, 1, 2, 1, 2, 3, 2, 1, 2, 1, 2],
+    [2, 1, 2, 2, 1, 2, 1, 1, 2, 1, 2, 1],
+    [2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2],   /* 1951 */
+    [1, 2, 1, 2, 4, 2, 1, 2, 1, 2, 1, 2],
+    [1, 2, 1, 1, 2, 2, 1, 2, 2, 1, 2, 2],
+    [1, 1, 2, 1, 1, 2, 1, 2, 2, 1, 2, 2],
+    [2, 1, 4, 1, 1, 2, 1, 2, 1, 2, 2, 2],
+    [1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 2],
+    [2, 1, 2, 1, 2, 1, 1, 5, 2, 1, 2, 2],
+    [1, 2, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2],
+    [1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1],
+    [2, 1, 2, 1, 2, 5, 2, 1, 2, 1, 2, 1],
+    [2, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2],   /* 1961 */
+    [1, 2, 1, 1, 2, 1, 2, 2, 1, 2, 2, 1],
+    [2, 1, 2, 3, 2, 1, 2, 1, 2, 2, 2, 1],
+    [2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 2, 2],
+    [1, 2, 1, 2, 1, 1, 2, 1, 1, 2, 2, 2],
+    [1, 2, 5, 2, 1, 1, 2, 1, 1, 2, 2, 1],
+    [2, 2, 1, 2, 2, 1, 1, 2, 1, 2, 1, 2],
+    [1, 2, 2, 1, 2, 1, 5, 2, 1, 2, 1, 2],
+    [1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1],
+    [2, 1, 1, 2, 2, 1, 2, 1, 2, 2, 1, 2],
+    [1, 2, 1, 1, 5, 2, 1, 2, 2, 2, 1, 2],   /* 1971 */
+    [1, 2, 1, 1, 2, 1, 2, 1, 2, 2, 2, 1],
+    [2, 1, 2, 1, 1, 2, 1, 1, 2, 2, 2, 1],
+    [2, 2, 1, 5, 1, 2, 1, 1, 2, 2, 1, 2],
+    [2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 2],
+    [2, 2, 1, 2, 1, 2, 1, 5, 2, 1, 1, 2],
+    [2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 1],
+    [2, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1],
+    [2, 1, 1, 2, 1, 6, 1, 2, 2, 1, 2, 1],
+    [2, 1, 1, 2, 1, 2, 1, 2, 2, 1, 2, 2],
+    [1, 2, 1, 1, 2, 1, 1, 2, 2, 1, 2, 2],   /* 1981 */
+    [2, 1, 2, 3, 2, 1, 1, 2, 2, 1, 2, 2],
+    [2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 2, 2],
+    [2, 1, 2, 2, 1, 1, 2, 1, 1, 5, 2, 2],
+    [1, 2, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2],
+    [1, 2, 2, 1, 2, 2, 1, 2, 1, 2, 1, 1],
+    [2, 1, 2, 2, 1, 5, 2, 2, 1, 2, 1, 2],
+    [1, 1, 2, 1, 2, 1, 2, 2, 1, 2, 2, 1],
+    [2, 1, 1, 2, 1, 2, 1, 2, 2, 1, 2, 2],
+    [1, 2, 1, 1, 5, 1, 2, 1, 2, 2, 2, 2],
+    [1, 2, 1, 1, 2, 1, 1, 2, 1, 2, 2, 2],   /* 1991 */
+    [1, 2, 2, 1, 1, 2, 1, 1, 2, 1, 2, 2],
+    [1, 2, 5, 2, 1, 2, 1, 1, 2, 1, 2, 1],
+    [2, 2, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2],
+    [1, 2, 2, 1, 2, 2, 1, 5, 2, 1, 1, 2],
+    [1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 2],
+    [1, 1, 2, 1, 2, 1, 2, 2, 1, 2, 2, 1],
+    [2, 1, 1, 2, 3, 2, 2, 1, 2, 2, 2, 1],
+    [2, 1, 1, 2, 1, 1, 2, 1, 2, 2, 2, 1],
+    [2, 2, 1, 1, 2, 1, 1, 2, 1, 2, 2, 1],
+    [2, 2, 2, 3, 2, 1, 1, 2, 1, 2, 1, 2],   /* 2001 */
+    [2, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1],
+    [2, 2, 1, 2, 2, 1, 2, 1, 1, 2, 1, 2],
+    [1, 5, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2],
+    [1, 2, 1, 2, 1, 2, 2, 1, 2, 2, 1, 1],
+    [2, 1, 2, 1, 2, 1, 5, 2, 2, 1, 2, 2],
+    [1, 1, 2, 1, 1, 2, 1, 2, 2, 2, 1, 2],
+    [2, 1, 1, 2, 1, 1, 2, 1, 2, 2, 1, 2],
+    [2, 2, 1, 1, 5, 1, 2, 1, 2, 1, 2, 2],
+    [2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2],
+    [2, 1, 2, 2, 1, 2, 1, 1, 2, 1, 2, 1],   /* 2011 */
+    [2, 1, 6, 2, 1, 2, 1, 1, 2, 1, 2, 1],
+    [2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2],
+    [1, 2, 1, 2, 1, 2, 1, 2, 5, 2, 1, 2],
+    [1, 2, 1, 1, 2, 1, 2, 2, 2, 1, 2, 1],
+    [2, 1, 2, 1, 1, 2, 1, 2, 2, 1, 2, 2],
+    [2, 1, 1, 2, 3, 2, 1, 2, 1, 2, 2, 2],
+    [1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 2],
+    [2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2],
+    [2, 1, 2, 5, 2, 1, 1, 2, 1, 2, 1, 2],
+    [1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1],   /* 2021 */
+    [2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2],
+    [1, 5, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2],
+    [1, 2, 1, 1, 2, 1, 2, 2, 1, 2, 2, 1],
+    [2, 1, 2, 1, 1, 5, 2, 1, 2, 2, 2, 1],
+    [2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 2, 2],
+    [1, 2, 1, 2, 1, 1, 2, 1, 1, 2, 2, 2],
+    [1, 2, 2, 1, 5, 1, 2, 1, 1, 2, 2, 1],
+    [2, 2, 1, 2, 2, 1, 1, 2, 1, 1, 2, 2],
+    [1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1],
+    [2, 1, 5, 2, 1, 2, 2, 1, 2, 1, 2, 1],   /* 2031 */
+    [2, 1, 1, 2, 1, 2, 2, 1, 2, 2, 1, 2],
+    [1, 2, 1, 1, 2, 1, 2, 1, 2, 2, 5, 2],
+    [1, 2, 1, 1, 2, 1, 2, 1, 2, 2, 2, 1],
+    [2, 1, 2, 1, 1, 2, 1, 1, 2, 2, 1, 2],
+    [2, 2, 1, 2, 1, 4, 1, 1, 2, 2, 1, 2],
+    [2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 2],
+    [2, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1],
+    [2, 2, 1, 2, 5, 2, 1, 2, 1, 2, 1, 1],
+    [2, 1, 2, 2, 1, 2, 2, 1, 2, 1, 2, 1],
+    [2, 1, 1, 2, 1, 2, 2, 1, 2, 2, 1, 2],   /* 2041 */
+    [1, 5, 1, 2, 1, 2, 1, 2, 2, 2, 1, 2],
+    [1, 2, 1, 1, 2, 1, 1, 2, 2, 1, 2, 2]
+];
+    
+function myDate(year, month, day, leapMonth)
+{
+    this.year = year;
+    this.month = month;
+    this.day = day;
+    this.leapMonth = leapMonth;
 }
 
-* {
-    box-sizing: border-box; /* 오페라(Opera) */
-    -moz-box-sizing: border-box; /* 파이어폭스(Firefox)*/
-    -webkit-box-sizing: border-box; /* 웹킷(Webkit) & 크롬(Chrome) */
-    color: white;
-}
-html{
-    background: url(../img/background.png);
-    background-size: contain;
-    overflow: hidden;
-}
-html,body,header,footer{
-    width:100%;
-    margin:0 auto;
-}
-body{
-    display:flex;
-}
-h1{
-    font-weight:900;
-    width: 100;
-    color: rgb(83, 133, 145);
-    letter-spacing: 5px;
-    font-size: 75px;
-    text-align: center;
-    transform: translateY(-35px);
-    text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-}
-.container{
-    align-self:center;
-    padding: 0px 10px;
-    position: relative;
-    width: 90%;
-    margin: 20px;
- /* border: 2px rgb(83, 133, 145) solid; */
-    box-shadow: 0px 5px 15px -6px rgba(0,0,0,0.75);
-    border-radius: 20px;
-    max-width: 450px;
-    margin: 10px auto;
-    background: rgba(5, 13, 25, 0.569);
-}
-#details{
-    display: flex;
-    text-align: left;
-    align-self:center;
-    font-size: 0.9em;
+function lunarCalc(year, month, day, type, leapmonth)
+{
+    var solYear, solMonth, solDay;
+    var lunYear, lunMonth, lunDay;
+    var lunLeapMonth, lunMonthDay;
+    var i, lunIndex;
+
+    var solMonthDay = [31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    /* range check */
+    if (year < 1900 || year > 2040)
+    {
+        alert('1900년부터 2040년까지만 지원합니다');
+        return;
+    }
+
+    /* 속도 개선을 위해 기준 일자를 여러개로 한다 */
+    if (year >= 2000)
+    {
+        /* 기준일자 양력 2000년 1월 1일 (음력 1999년 11월 25일) */
+        solYear = 2000;
+        solMonth = 1;
+        solDay = 1;
+        lunYear = 1999;
+        lunMonth = 11;
+        lunDay = 25;
+        lunLeapMonth = 0;
+
+        solMonthDay[1] = 29;    /* 2000 년 2월 28일 */
+        lunMonthDay = 30;   /* 1999년 11월 */
+    }
+    else if (year >= 1970)
+    {
+        /* 기준일자 양력 1970년 1월 1일 (음력 1969년 11월 24일) */
+        solYear = 1970;
+        solMonth = 1;
+        solDay = 1;
+        lunYear = 1969;
+        lunMonth = 11;
+        lunDay = 24;
+        lunLeapMonth = 0;
+
+        solMonthDay[1] = 28;    /* 1970 년 2월 28일 */
+        lunMonthDay = 30;   /* 1969년 11월 */
+    }
+    else if (year >= 1940)
+    {
+        /* 기준일자 양력 1940년 1월 1일 (음력 1939년 11월 22일) */
+        solYear = 1940;
+        solMonth = 1;
+        solDay = 1;
+        lunYear = 1939;
+        lunMonth = 11;
+        lunDay = 22;
+        lunLeapMonth = 0;
+
+        solMonthDay[1] = 29;    /* 1940 년 2월 28일 */
+        lunMonthDay = 29;   /* 1939년 11월 */
+    }
+    else
+    {
+        /* 기준일자 양력 1900년 1월 1일 (음력 1899년 12월 1일) */
+        solYear = 1900;
+        solMonth = 1;
+        solDay = 1;
+        lunYear = 1899;
+        lunMonth = 12;
+        lunDay = 1;
+        lunLeapMonth = 0;
+
+        solMonthDay[1] = 28;    /* 1900 년 2월 28일 */
+        lunMonthDay = 30;   /* 1899년 12월 */
+    }
+
+    lunIndex = lunYear - 1899;
+
+    while (true)
+    {
+
+        if (type == 1 &&
+            year == solYear &&
+            month == solMonth &&
+            day == solDay)
+        {
+            return new myDate(lunYear, lunMonth, lunDay, lunLeapMonth);
+        }
+        else if (type == 2 &&
+                year == lunYear &&
+                month == lunMonth &&
+                day == lunDay &&
+                leapmonth == lunLeapMonth)
+        {
+            return new myDate(solYear, solMonth, solDay, 0);
+        }
+
+        /* add a day of solar calendar */
+        if (solMonth == 12 && solDay == 31)
+        {
+            solYear++;
+            solMonth = 1;
+            solDay = 1;
+
+            /* set monthDay of Feb */
+            if (solYear % 400 == 0)
+                solMonthDay[1] = 29;
+            else if (solYear % 100 == 0)
+                solMonthDay[1] = 28;
+            else if (solYear % 4 == 0)
+                solMonthDay[1] = 29;
+            else
+                solMonthDay[1] = 28;
+
+        }
+        else if (solMonthDay[solMonth - 1] == solDay)
+        {
+            solMonth++;
+            solDay = 1;
+        }
+        else
+            solDay++;
+
+        /* add a day of lunar calendar */
+        if (lunMonth == 12 &&
+            ((lunarMonthTable[lunIndex][lunMonth - 1] == 1 && lunDay == 29) ||
+            (lunarMonthTable[lunIndex][lunMonth - 1] == 2 && lunDay == 30)))
+        {
+            lunYear++;
+            lunMonth = 1;
+            lunDay = 1;
+
+            if (lunYear > 2043) {
+                alert("입력하신 달은 없습니다.");
+                break;
+            }
+
+            lunIndex = lunYear - 1899;
+
+            if (lunarMonthTable[lunIndex][lunMonth - 1] == 1)
+                lunMonthDay = 29;
+            else if (lunarMonthTable[lunIndex][lunMonth - 1] == 2)
+                lunMonthDay = 30;
+        }
+        else if (lunDay == lunMonthDay)
+        {
+            if (lunarMonthTable[lunIndex][lunMonth - 1] >= 3
+                && lunLeapMonth == 0)
+            {
+                lunDay = 1;
+                lunLeapMonth = 1;
+            }
+            else
+            {
+                lunMonth++;
+                lunDay = 1;
+                lunLeapMonth = 0;
+            }
+
+            if (lunarMonthTable[lunIndex][lunMonth - 1] == 1)
+                lunMonthDay = 29;
+            else if (lunarMonthTable[lunIndex][lunMonth - 1] == 2)
+                lunMonthDay = 30;
+            else if (lunarMonthTable[lunIndex][lunMonth - 1] == 3)
+                lunMonthDay = 29;
+            else if (lunarMonthTable[lunIndex][lunMonth - 1] == 4 &&
+                    lunLeapMonth == 0)
+                lunMonthDay = 29;
+            else if (lunarMonthTable[lunIndex][lunMonth - 1] == 4 &&
+                    lunLeapMonth == 1)
+                lunMonthDay = 30;
+            else if (lunarMonthTable[lunIndex][lunMonth - 1] == 5 &&
+                    lunLeapMonth == 0)
+                lunMonthDay = 30;
+            else if (lunarMonthTable[lunIndex][lunMonth - 1] == 5 &&
+                    lunLeapMonth == 1)
+                    lunMonthDay = 29;
+            else if (lunarMonthTable[lunIndex][lunMonth - 1] == 6)
+                lunMonthDay = 30;
+        }
+        else
+            lunDay++;
+    }
 }
 
-#details span{
-/*   display: block; */
-    color: rgb(83, 133, 145);
-    display: inline-block;
+function dayCalcDisplay(startYear,startMonth,startDay)
+{
+    if ( !startYear || startYear == 0 ||
+            !startMonth || startMonth == 0 ||
+            !startDay || startDay == 0 )
+    {
+        alert('날짜를 입력해주세요');
+        return;
+    }
+
+    var solMonthDay = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+    if (startYear % 400 == 0 || ( startYear % 4 == 0 && startYear % 100 != 0 )) solMonthDay[1] += 1;
+
+
+    if ( startMonth < 1 || startMonth > 12 ||
+            startDay < 1 || startDay > solMonthDay[startMonth-1] ) {
+        if ( solMonthDay[1] == 28 && startMonth == 2 && startDay > 28 )
+            alert("윤년이 아닙니다. 다시 입력해주세요");
+        else
+            alert("날짜 범위를 벗어났습니다. 다시 입력해주세요");
+        return;
+    }
+
+    var startDate = new Date(startYear, startMonth - 1, startDay);
+
+    /* 양력/음력 변환 */
+    var date = lunarCalc(startYear, startMonth, startDay, 1);
+
+    return {
+        year:date.year,
+        month:date.month,
+        day:date.day
+    };
 }
 
-#details span:nth-child(odd){
-    width: 150px;
-    border-left: 2px solid rgb(83, 133, 145);
-    padding-left: 10px;
-}
-#details span:nth-child(even){
-    align-self: flex-end;
-    color:#CDC5BD;
-    text-align: right;
-    width: 150px;
-    border-right: 2px solid #CDC5BD;
-    padding-right: 10px;
-}
-li{
-    list-style: none;
-    margin: 25px auto;
-    padding:0px;
-}
-ul{
-    margin: 0px auto;
-    padding: 0px;
-    padding-bottom: 25px;
-}
-#moon{
-    text-align: center;
-}
-nav{
-    position: fixed;
-    left: 0;
-    top: 0;
-}
-@media ( max-width: 1023px ) {
-  
-}
-@media ( max-width: 767px ) {
-    html,body,header,footer{
-        width:100%;
-        height: 100%;
-        margin:0 auto;
-    }
-    header{
-        padding: 50px;
-        height: 20%;
-    }
-    header>span{
-        font-size: 3em;
-        font-style: bold;
-    }
-    nav{
-        position: fixed;
-        left: 0;
-        top: 0;
-    }
-    .content{
-        padding: 50px;
-        height: 50%;
-        text-align: center;
-    }
-    .content>.img>img{
-        width: 200px;
-    }
-    .date>span{
-        font-size: 3em;
-        font-style: bold;
-        text-align: center;
-    }
-    footer{
-        padding: 20px;
-        height: 30%;
-    }
+window.onload=function(){
+    var gYear=new Date().getFullYear();
+    var gMonth=new Date().getMonth()+1+"";
+    var gDay=new Date().getDate()+"";
+    var moon=document.getElementById("moon");
+    var solar=document.getElementById("solar");
+    var lunar=document.getElementById("lunar"); 
+    var ymd=dayCalcDisplay(gYear,gMonth,gDay);
+    ymd.month=ymd.month+""; ymd.day=ymd.day+"";
+    if(ymd.month.length==1) ymd.month="0"+ymd.month;
+    if(ymd.day.length==1) ymd.day="0"+ymd.day;
+    if(gMonth.length==1) gMonth="0"+gMonth;
+    if(gDay.length==1) gDay="0"+gDay;
+    moon.innerHTML="<img src=https://d5.co.kr/img/luna/2/s/"+ymd.day+".png />";
+    solar.innerHTML=gYear+"년 "+gMonth+"월 "+gDay+"일";
+    lunar.innerHTML=ymd.year+"년 "+ymd.month+"월 "+ymd.day+"일";
+    /*
+    var xhr = new XMLHttpRequest();
+    //var test="https://www.hidemyass-freeproxy.com/proxy/ko-kr/aHR0cDovL2FwaXMuZGF0YS5nby5rci9CMDkwMDQxL29wZW5hcGkvc2VydmljZS9SaXNlU2V0SW5mb1NlcnZpY2UvZ2V0QXJlYVJpc2VTZXRJbmZvP1NlcnZpY2VLZXk9bWxVemZIJTJGY0JkTmFwZEZPNGdDMSUyRnJUcXBWTk8wdkloQ1lRcjhZMmxQOUx0bVV0cW85YXB6MGY3JTJCREJDR0dKVldiaEZQNmxKRE92QW5UYk5rYmRyOXclM0QlM0QmbG9jZGF0ZT0yMDIxMDMxNiZsb2NhdGlvbj0lRUMlODQlOUMlRUMlOUElQjg";
+    var url = 'http://apis.data.go.kr/B090041/openapi/service/RiseSetInfoService/getAreaRiseSetInfo';
+    var key = "mlUzfH%2FcBdNapdFO4gC1%2FrTqpVNO0vIhCYQr8Y2lP9LtmUtqo9apz0f7%2BDBCGGJVWbhFP6lJDOvAnTbNkbdr9w%3D%3D";
+    var queryParams = '?' + encodeURIComponent('ServiceKey') + '='+key;
+    
+    queryParams += '&' + encodeURIComponent('locdate') + '=' + encodeURIComponent('20210316');
+    queryParams += '&' + encodeURIComponent('location') + '=' + encodeURIComponent('서울');
+    xhr.open('GET', url+queryParams);
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+        }
+    };
+    xhr.send('');
+    
+    $.ajax({
+        url:url + queryParams,
+        dataType:'json',
+        success: function(data) {
+          console.log(data);
+        }
+    });
+    */
 }
