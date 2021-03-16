@@ -4,18 +4,26 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
         <title>TodayMoon</title>
-        <link rel="stylesheet" type="text/css" href="css/font.css">
         <link rel="stylesheet" href="css/style.css">
         <script src="js/main.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     </head>
     <body>
         <header>
             <span>오늘의 달</span>
         </header>
         <nav>메뉴 예정</nav>
-        <div class="content">
+        <div class="container">
             <div class="img" id="moon"></div>
-            <div class="date" id="date"></div>
+            <h1>MOON</h1>
+            <div id="details">
+                <ul>
+                    <li><span>Solar</span><span id="solar"></span></li>
+                    <li><span>Lunar</span><span id="lunar"></span></li>
+                    <li><span>MOONRISE</span><span>7.53B</span></li>
+                    <li><span>MOONSET</span><span>92.96M</span></li>
+                </ul>
+            </div>
         </div>
         <footer>
             <span>Copyright 2021. 경명호. All rights reserved.</span>
