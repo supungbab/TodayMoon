@@ -1,6 +1,6 @@
 # TodayMoon
 > 🌕 오늘의 달
-> https://supungbab.github.io/TodayMoon/
+> https://todaymoon.kro.kr
 
 <br />
 
