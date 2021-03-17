@@ -398,6 +398,7 @@ window.onload=function(){
     xhr.onreadystatechange = function () {
         if (this.readyState == 4) {
             jsonObj = JSON.parse(this.responseText);
+            console.log(jsonObj);
         }
     };
     xhr.send('');
