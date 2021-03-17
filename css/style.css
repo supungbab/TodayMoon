@@ -27,6 +27,7 @@ html,body,header,footer{
 body{
     display:flex;
     height: 100%;
+    min-width:375px;
 }
 .container{
     align-self:center;
