@@ -379,7 +379,9 @@ window.onload=function(){
     var gDay=new Date().getDate()+"";
     var moon=document.getElementById("moon");
     var solar=document.getElementById("solar");
-    var lunar=document.getElementById("lunar"); 
+    var lunar=document.getElementById("lunar");
+    var moonrise=document.getElementById("moonrise");
+    var moonset=document.getElementById("moonset");
     var ymd=dayCalcDisplay(gYear,gMonth,gDay);
     ymd.month=ymd.month+""; ymd.day=ymd.day+"";
     if(ymd.month.length==1) ymd.month="0"+ymd.month;
@@ -389,13 +391,18 @@ window.onload=function(){
     moon.innerHTML="<img src=https://d5.co.kr/img/luna/2/s/"+ymd.day+".png />";
     solar.innerHTML=gYear+"년 "+gMonth+"월 "+gDay+"일";
     lunar.innerHTML=ymd.year+"년 "+ymd.month+"월 "+ymd.day+"일";
+    var jsonObj;
     var xhr = new XMLHttpRequest();
     var url = 'https://us-central1-liquid-virtue-307900.cloudfunctions.net/todayMoon'; /*URL*/
     xhr.open('GET', url);
     xhr.onreadystatechange = function () {
         if (this.readyState == 4) {
-            alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+            jsonObj = JSON.parse(this.responseText);
         }
     };
     xhr.send('');
+    let moonriseT = JSON.parse(jsonObj.body).moonrise;
+    let moonsetT = JSON.parse(jsonObj.body).moonset;
+    moonrise.innerHTML=moonriseT[0]+moonriseT[1]+" : "+moonriseT[2]+moonriseT[3];
+    moonset.innerHTML=moonsetT[0]+moonsetT[1]+" : "+moonsetT[2]+moonsetT[3];
 }
