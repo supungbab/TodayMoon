@@ -388,22 +388,20 @@ window.onload=function(){
     if(ymd.day.length==1) ymd.day="0"+ymd.day;
     if(gMonth.length==1) gMonth="0"+gMonth;
     if(gDay.length==1) gDay="0"+gDay;
-    moon.innerHTML="<img src=https://d5.co.kr/img/luna/2/s/"+ymd.day+".png />";
+    //moon.innerHTML="<img src=https://d5.co.kr/img/luna/2/s/"+ymd.day+".png />";
     solar.innerHTML=gYear+"년 "+gMonth+"월 "+gDay+"일";
     lunar.innerHTML=ymd.year+"년 "+ymd.month+"월 "+ymd.day+"일";
-    var jsonObj;
-    var xhr = new XMLHttpRequest();
-    var url = 'https://us-central1-liquid-virtue-307900.cloudfunctions.net/todayMoon'; /*URL*/
-    xhr.open('GET', url);
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4) {
-            jsonObj = JSON.parse(this.responseText);
-            console.log(jsonObj);
+    let jsonObj, moonriseT, moonsetT;
+    $.ajax({
+        url: "https://us-central1-liquid-virtue-307900.cloudfunctions.net/todayMoon", // 클라이언트가 요청을 보낼 서버의 URL 주소
+        type: "GET", // HTTP 요청 방식(GET, POST)
+        dataType: "json", // 서버에서 보내줄 데이터의 타입
+        success: function(data){
+            jsonObj = data;
+            moonriseT = JSON.parse(jsonObj.body).moonrise;
+            moonsetT = JSON.parse(jsonObj.body).moonset;
+            moonrise.innerHTML=moonriseT[0]+moonriseT[1]+" : "+moonriseT[2]+moonriseT[3];
+            moonset.innerHTML=moonsetT[0]+moonsetT[1]+" : "+moonsetT[2]+moonsetT[3];
         }
-    };
-    xhr.send('');
-    let moonriseT = JSON.parse(jsonObj.body).moonrise;
-    let moonsetT = JSON.parse(jsonObj.body).moonset;
-    moonrise.innerHTML=moonriseT[0]+moonriseT[1]+" : "+moonriseT[2]+moonriseT[3];
-    moonset.innerHTML=moonsetT[0]+moonsetT[1]+" : "+moonsetT[2]+moonsetT[3];
+    })
 }
