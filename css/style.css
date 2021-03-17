@@ -54,7 +54,6 @@ body{
     animation:moon 10s linear infinite;
     -webkit-animation:moon 10s linear infinite;
     -moz-animation:moon 10s linear infinite;
-    -o-animation:moon 10s linear infinite;
 }
 @keyframes moon{
     0% {
@@ -114,26 +113,6 @@ body{
         -moz-background:#eee;
         -moz-border-left:0 solid #333;
         -moz-border-right:125px solid #eee;
-    }
-}
-@-o-keyframes moon{
-    0% {
-        -o-background:#333;
-        -o-border-left:125px solid #333;
-        -o-border-right:0 solid #eee;
-    }
-    50% {
-        -o-background:#333;
-        -o-border-left:125px solid #333;
-        -o-border-right:125px solid #eee;
-    }
-    51% {
-        -o-background:#eee;
-    }
-    100% {
-        -o-background:#eee;
-        -o-border-left:0 solid #333;
-        -o-border-right:125px solid #eee;
     }
 }
 
