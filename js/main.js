@@ -389,29 +389,13 @@ window.onload=function(){
     moon.innerHTML="<img src=https://d5.co.kr/img/luna/2/s/"+ymd.day+".png />";
     solar.innerHTML=gYear+"년 "+gMonth+"월 "+gDay+"일";
     lunar.innerHTML=ymd.year+"년 "+ymd.month+"월 "+ymd.day+"일";
-    /*
     var xhr = new XMLHttpRequest();
-    //var test="https://www.hidemyass-freeproxy.com/proxy/ko-kr/aHR0cDovL2FwaXMuZGF0YS5nby5rci9CMDkwMDQxL29wZW5hcGkvc2VydmljZS9SaXNlU2V0SW5mb1NlcnZpY2UvZ2V0QXJlYVJpc2VTZXRJbmZvP1NlcnZpY2VLZXk9bWxVemZIJTJGY0JkTmFwZEZPNGdDMSUyRnJUcXBWTk8wdkloQ1lRcjhZMmxQOUx0bVV0cW85YXB6MGY3JTJCREJDR0dKVldiaEZQNmxKRE92QW5UYk5rYmRyOXclM0QlM0QmbG9jZGF0ZT0yMDIxMDMxNiZsb2NhdGlvbj0lRUMlODQlOUMlRUMlOUElQjg";
-    var url = 'http://apis.data.go.kr/B090041/openapi/service/RiseSetInfoService/getAreaRiseSetInfo';
-    var key = "mlUzfH%2FcBdNapdFO4gC1%2FrTqpVNO0vIhCYQr8Y2lP9LtmUtqo9apz0f7%2BDBCGGJVWbhFP6lJDOvAnTbNkbdr9w%3D%3D";
-    var queryParams = '?' + encodeURIComponent('ServiceKey') + '='+key;
-    
-    queryParams += '&' + encodeURIComponent('locdate') + '=' + encodeURIComponent('20210316');
-    queryParams += '&' + encodeURIComponent('location') + '=' + encodeURIComponent('서울');
-    xhr.open('GET', url+queryParams);
+    var url = 'https://us-central1-liquid-virtue-307900.cloudfunctions.net/todayMoon'; /*URL*/
+    xhr.open('GET', url);
     xhr.onreadystatechange = function () {
         if (this.readyState == 4) {
             alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
         }
     };
     xhr.send('');
-    
-    $.ajax({
-        url:url + queryParams,
-        dataType:'json',
-        success: function(data) {
-          console.log(data);
-        }
-    });
-    */
 }
