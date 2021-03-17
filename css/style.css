@@ -51,30 +51,10 @@ body{
     background:#333;
     border-radius:50%;
     box-shadow: 0 1px 2px rgb(255 255 255 / 7%), 0 2px 4px rgb(255 255 255 / 7%), 0 4px 8px rgb(255 255 255 / 7%), 0 8px 16px rgb(255 255 255 / 7%), 0 16px 32px rgb(255 255 255 / 7%), 0 32px 64px rgb(255 255 255 / 7%);
-    -webkit-animation:moon 10s linear infinite;
     animation:moon 10s linear infinite;
-    -webkit-animation-fill-mode:both;
-    animation-fill-mode:both;
-}
-@-webkit-keyframes moon{
-    0% {
-        -webkit-background:#333;
-        -webkit-border-right:125px solid #333;
-        -webkit-border-left:0 solid #eee;
-      }
-      50% {
-        -webkit-background:#333;
-        -webkit-border-right:125px solid #333;
-        -webkit-border-left:125px solid #eee;
-      }
-      51% {
-        -webkit-background:#eee;
-      }
-      100% {
-        -webkit-background:#eee;
-        -webkit-border-right:0 solid #333;
-        -webkit-border-left:125px solid #eee;
-      }
+    -webkit-animation:moon 10s linear infinite;
+    -moz-animation:moon 10s linear infinite;
+    -o-animation:moon 10s linear infinite;
 }
 @keyframes moon{
     0% {
@@ -96,6 +76,67 @@ body{
         border-right:125px solid #eee;
     }
 }
+@-webkit-keyframes moon{
+    0% {
+        -webkit-background:#333;
+        -webkit-border-right:125px solid #333;
+        -webkit-border-left:0 solid #eee;
+      }
+      50% {
+        -webkit-background:#333;
+        -webkit-border-right:125px solid #333;
+        -webkit-border-left:125px solid #eee;
+      }
+      51% {
+        -webkit-background:#eee;
+      }
+      100% {
+        -webkit-background:#eee;
+        -webkit-border-right:0 solid #333;
+        -webkit-border-left:125px solid #eee;
+      }
+}
+@-moz-keyframes moon{
+    0% {
+        -moz-background:#333;
+        -moz-border-left:125px solid #333;
+        -moz-border-right:0 solid #eee;
+    }
+    50% {
+        -moz-background:#333;
+        -moz-border-left:125px solid #333;
+        -moz-border-right:125px solid #eee;
+    }
+    51% {
+        -moz-background:#eee;
+    }
+    100% {
+        -moz-background:#eee;
+        -moz-border-left:0 solid #333;
+        -moz-border-right:125px solid #eee;
+    }
+}
+@-o-keyframes moon{
+    0% {
+        -o-background:#333;
+        -o-border-left:125px solid #333;
+        -o-border-right:0 solid #eee;
+    }
+    50% {
+        -o-background:#333;
+        -o-border-left:125px solid #333;
+        -o-border-right:125px solid #eee;
+    }
+    51% {
+        -o-background:#eee;
+    }
+    100% {
+        -o-background:#eee;
+        -o-border-left:0 solid #333;
+        -o-border-right:125px solid #eee;
+    }
+}
+
 #name{
     text-align: center;
     vertical-align: middle;
