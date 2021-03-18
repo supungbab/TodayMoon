@@ -392,22 +392,17 @@ window.onload=function(){
     solar.innerHTML=gYear+"년 "+gMonth+"월 "+gDay+"일";
     lunar.innerHTML=ymd.year+"년 "+ymd.month+"월 "+ymd.day+"일";
     let jsonObj, moonriseT, moonsetT;
-    function getData(callbackFunc){
-        $.ajax({
-            url: "https://us-central1-liquid-virtue-307900.cloudfunctions.net/todayMoon", // 클라이언트가 요청을 보낼 서버의 URL 주소
-            type: "GET", // HTTP 요청 방식(GET, POST)
-            dataType: "json", // 서버에서 보내줄 데이터의 타입
-            success: function(data){
-                callbackFunc(data);
-            }
-        });
-    };
-    getData(function(moondata){
-        jsonObj = moondata;
-        console.log(moondata);
-        moonriseT = JSON.parse(jsonObj.body).moonrise;
-        moonsetT = JSON.parse(jsonObj.body).moonset;
-        moonrise.innerHTML=moonriseT[0]+moonriseT[1]+" : "+moonriseT[2]+moonriseT[3];
-        moonset.innerHTML=moonsetT[0]+moonsetT[1]+" : "+moonsetT[2]+moonsetT[3];
+    $.ajax({
+        url: "https://us-central1-liquid-virtue-307900.cloudfunctions.net/todayMoon", // 클라이언트가 요청을 보낼 서버의 URL 주소
+        type: "GET", // HTTP 요청 방식(GET, POST)
+        dataType: "json", // 서버에서 보내줄 데이터의 타입
+        success: function(data){
+            jsonObj = data;
+            console.log(data);
+            moonriseT = JSON.parse(jsonObj.body).moonrise;
+            moonsetT = JSON.parse(jsonObj.body).moonset;
+            moonrise.innerHTML=moonriseT[0]+moonriseT[1]+" : "+moonriseT[2]+moonriseT[3];
+            moonset.innerHTML=moonsetT[0]+moonsetT[1]+" : "+moonsetT[2]+moonsetT[3];
+        }
     });
 }
