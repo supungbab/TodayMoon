@@ -373,7 +373,7 @@ function dayCalcDisplay(startYear,startMonth,startDay)
     };
 }
 
-let jsonObj, moonriseT, moonsetT, lunAge;
+let moonriseT, moonsetT, lunAge;
 const moonline=[0, 13.8, 27.6, 41.4, 55.2, 69, 82.8, 96.6, 110.4, 125, 104, 83.2, 62.4, 41.6, 20.8, 0, 15.625, 31.25, 46.875, 62.5, 78.125, 93.75, 109.375, 125, 107.2, 89.4, 71.6, 53.8, 36, 18.2];
 
 
@@ -383,44 +383,49 @@ function moonSet(){
         type: "GET", // HTTP 요청 방식(GET, POST)
         dataType: "json", // 서버에서 보내줄 데이터의 타입
         success: function(data){
-            jsonObj = data;
+            let jsonObj = data;
             console.log(data);
             moonriseT = JSON.parse(jsonObj.body).moonrise;
             moonsetT = JSON.parse(jsonObj.body).moonset;
+            moonrise.innerHTML=moonriseT[0]+moonriseT[1]+" : "+moonriseT[2]+moonriseT[3];
+            moonset.innerHTML=moonsetT[0]+moonsetT[1]+" : "+moonsetT[2]+moonsetT[3];
+        }
+    });
+}
+function moonSet2(){
+    $.ajax({
+        url: "https://us-central1-liquid-virtue-307900.cloudfunctions.net/todayMoon2", // 클라이언트가 요청을 보낼 서버의 URL 주소
+        type: "GET", // HTTP 요청 방식(GET, POST)
+        dataType: "json", // 서버에서 보내줄 데이터의 타입
+        success: function(data){
+            let jsonObj = data;
+            console.log(data);
             lunAge = JSON.parse(jsonObj.body).lunAge;
-            if(moonriseT[0]=='S'){
-                console.log("여긴 오류라서 다시 처리합니다.");
-                moonSet();
+            lunAge=Math.round(lunAge);
+            if(0<lunAge&&lunAge<=9){
+                $('#moon').css({
+                    "border-right":moonline[lunAge]+"px solid #eee"
+                });
             }
-            else{
-                moonrise.innerHTML=moonriseT[0]+moonriseT[1]+" : "+moonriseT[2]+moonriseT[3];
-                moonset.innerHTML=moonsetT[0]+moonsetT[1]+" : "+moonsetT[2]+moonsetT[3];
-                lunAge=Math.round(lunAge);
-                if(0<lunAge&&lunAge<=9){
-                    $('#moon').css({
-                        "border-right":moonline[lunAge]+"px solid #eee"
-                    });
-                }
-                else if(10<=lunAge&&lunAge<=15){
-                    $('#moon').css({
-                        "background":"#eee",
-                        "border-left":moonline[lunAge]+"px solid #333",
-                        "border-right":"125px solid #eee"
-                    });
-                }
-                else if(16<=lunAge&&lunAge<=23){
-                    $('#moon').css({
-                        "background":"#eee",
-                        "border-right":moonline[lunAge]+"px solid #333",
-                    });
-                }
-                else if(24<=lunAge&&lunAge<=29){
-                    $('#moon').css({
-                        "background":"#333",
-                        "border-left":moonline[lunAge]+"px solid #eee",
-                        "border-right":"125px solid #333"
-                    });
-                }
+            else if(10<=lunAge&&lunAge<=15){
+                $('#moon').css({
+                    "background":"#eee",
+                    "border-left":moonline[lunAge]+"px solid #333",
+                    "border-right":"125px solid #eee"
+                });
+            }
+            else if(16<=lunAge&&lunAge<=23){
+                $('#moon').css({
+                    "background":"#eee",
+                    "border-right":moonline[lunAge]+"px solid #333",
+                });
+            }
+            else if(24<=lunAge&&lunAge<=29){
+                $('#moon').css({
+                    "background":"#333",
+                    "border-left":moonline[lunAge]+"px solid #eee",
+                    "border-right":"125px solid #333"
+                });
             }
         }
     });
@@ -444,5 +449,5 @@ window.onload=function(){
     solar.innerHTML=gYear+"년 "+gMonth+"월 "+gDay+"일";
     lunar.innerHTML=ymd.year+"년 "+ymd.month+"월 "+ymd.day+"일";
     moonSet();
-
+    moonSet2();
 }
