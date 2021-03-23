@@ -411,7 +411,6 @@ function moonSet2(){
                 $('#moon').css({
                     "background":"#eee",
                     "border-left":moonline[lunAge]+"px solid #333",
-                    "border-right":"125px solid #eee"
                 });
             }
             else if(16<=lunAge&&lunAge<=23){
@@ -424,7 +423,6 @@ function moonSet2(){
                 $('#moon').css({
                     "background":"#333",
                     "border-left":moonline[lunAge]+"px solid #eee",
-                    "border-right":"125px solid #333"
                 });
             }
         }
