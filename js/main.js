@@ -379,7 +379,7 @@ const moonline=[0, 13.8, 27.6, 41.4, 55.2, 69, 82.8, 96.6, 110.4, 125, 104, 83.2
 
 function moonSet(){
     $.ajax({
-        url: "https://us-central1-liquid-virtue-307900.cloudfunctions.net/todayMoon", // 클라이언트가 요청을 보낼 서버의 URL 주소
+        url: "https://asia-northeast3-liquid-virtue-307900.cloudfunctions.net/todayMoon-1", // 클라이언트가 요청을 보낼 서버의 URL 주소
         type: "GET", // HTTP 요청 방식(GET, POST)
         dataType: "json", // 서버에서 보내줄 데이터의 타입
         success: function(data){
@@ -394,7 +394,7 @@ function moonSet(){
 }
 function moonSet2(){
     $.ajax({
-        url: "https://us-central1-liquid-virtue-307900.cloudfunctions.net/todayMoon2", // 클라이언트가 요청을 보낼 서버의 URL 주소
+        url: "https://asia-northeast3-liquid-virtue-307900.cloudfunctions.net/todayMoon2-1", // 클라이언트가 요청을 보낼 서버의 URL 주소
         type: "GET", // HTTP 요청 방식(GET, POST)
         dataType: "json", // 서버에서 보내줄 데이터의 타입
         success: function(data){
