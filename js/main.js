@@ -792,6 +792,7 @@ function moonSetting(){
     }
 }
 
+/*
 function moonSet(){
     $.ajax({
         url: "https://asia-northeast3-liquid-virtue-307900.cloudfunctions.net/todayMoon-1", // 클라이언트가 요청을 보낼 서버의 URL 주소
@@ -843,6 +844,8 @@ function moonSet2(){
         }
     });
 }
+*/
+
 window.onload=function(){
     var gYear=new Date().getFullYear();
     var gMonth=new Date().getMonth()+1+"";
