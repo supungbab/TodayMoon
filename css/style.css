@@ -12,6 +12,7 @@
     color: white;
 }
 html{
+    touch-action: none;
     height: 100vh;
     background-image: url(../img/background.png);
     background-repeat: no-repeat;
