@@ -1,6 +1,5 @@
-# TodayMoon
-> 🌕 오늘의 달
-> https://todaymoon.kro.kr
+# 🌕 오늘의 달
+>  https://todaymoon.kro.kr
 
 <br />
 
