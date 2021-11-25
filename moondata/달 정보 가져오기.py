@@ -33,7 +33,7 @@ for dt in rrule(DAILY, dtstart=a, until=b):
     index1=res2.text.find('<lunAge>')+8
     index2=res2.text.find('</lunAge>')
     lunAge=res2.text[index1:index2]
-    print(dt.strftime("%Y%m%d"), moonrise, moonset, lunAge)
+    print('["'+dt.strftime("%Y%m%d")+'",', '"'+moonrise+'",', '"'+moonset+'",', '"'+lunAge+'"],')
 print('end')
 
 
